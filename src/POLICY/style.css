@@ -1,0 +1,10 @@
+.menuitem1 {
+    /* cursor: pointer; */
+    margin-left: 30px;
+}
+
+.hoverbtn:hover {
+    background-color: blue;
+    border-radius: 4px;
+    
+}
