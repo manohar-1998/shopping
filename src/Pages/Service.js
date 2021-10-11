@@ -50,8 +50,8 @@ const Service = () => {
     console.log("inputList=", inputList)
     async function handleToken(token, address) {
         console.log("Token==", token, address)
-        // const response = await axios.post(`http://localhost:5000/api/v1/checkout`, {
-            const response = await axios.post(`https://shopping-gm.herokuapp.com/api/v1/checkout`, {
+        const response = await axios.post(`http://localhost:5000/api/v1/checkout`, {
+            // const response = await axios.post(`https://shopping-gm.herokuapp.com/api/v1/checkout`, {
             token,
             address,
             inputList,
@@ -122,7 +122,7 @@ const Service = () => {
             <div>
                 <img src={bannerimage} style={{ width: '100%' }} ></img>
             </div>
-            <div class="row" style={{ float: 'left', display: window.innerWidth <= 768 ? 'block' : 'flex', width: window.innerWidth <= 768 ? '100%' : '80%', margin: window.innerWidth <= 768 ? '' : '10px 0px 0px 160px', justifyContent: 'center', backgroundColor: 'lavenderblush' }}>
+            <div class="row" style={{ float: 'left', display: window.innerWidth <= 768 ? 'block' : 'flex', width: window.innerWidth <= 768 ? '100%' : '80%', margin: window.innerWidth <= 768 ? '' : '10px 0px 0px 160px', justifyContent: 'center'}}>
                 <div style={{ width: window.innerWidth <= 768 ? '100%' : '50%' }}>
                     <div style={{ display: window.innerWidth <= 768 ? 'block' : 'flex', }}>
                         <div style={{

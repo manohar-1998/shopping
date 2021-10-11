@@ -131,8 +131,8 @@ function App() {
   console.log("product==",product)
   async function handleToken(token, address) {
     console.log("Token==", token, address)
-    // const response = await axios.post(`http://localhost:5000/api/v1/shopcheckout`, {
-      const response = await axios.post(`https://shopping-gm.herokuapp.com/api/v1/checkout`, {
+    const response = await axios.post(`http://localhost:5000/api/v1/shopcheckout`, {
+      // const response = await axios.post(`https://shopping-gm.herokuapp.com/api/v1/checkout`, {
       token,
       product,
     })
@@ -219,9 +219,9 @@ function App() {
   }
 
   return (
-    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}>
+    <div >
       <div>
-        <div style={{ backgroundColor: 'rgb(22,155,215', width: '100%' }}>
+        <div style={{  width: '100%' }}>
           <img src={cyspacelogo} alt style={{width: window.innerWidth<=786 ? '100%' : '257px' }} height='200' tabIndex="0"></img>
           <img src={headerimg} alt style={{display: window.innerWidth<=786 ? 'none' : '' }} width='83%' height='200' tabIndex="0"></img>
         </div>
@@ -1099,7 +1099,7 @@ function App() {
         </div>
       </div>
       <div>
-        <div class="row" style={{ float: 'left', display: window.innerWidth <= 768 ? 'block' : 'flex', margin: window.innerWidth <= 768 ? '' : '20px 0px 0px 160px', width: window.innerWidth <= 768 ? '100%' : '80%', alignContent: 'center', backgroundColor: 'lavenderblush' }}>
+        <div class="row" style={{ float: 'left', display: window.innerWidth <= 768 ? 'block' : 'flex', margin: window.innerWidth <= 768 ? '' : '20px 0px 0px 160px', width: window.innerWidth <= 768 ? '100%' : '80%', alignContent: 'center', }}>
           <div style={{ width: window.innerWidth <= 768 ? '100%' : '50%' }}>
             <div style={{ display: window.innerWidth <= 768 ? 'block' : 'flex' }}>
               <div style={{
@@ -1183,7 +1183,7 @@ const table1div = {
   margin: window.innerWidth <= 768 ? '0px' : '0px 0px 0px 160px',
   width: window.innerWidth <= 768 ? '100%' : '80%',
   alignContent: 'center',
-  backgroundColor: 'lavenderblush',
+  // backgroundColor: 'lavenderblush',
   padding: window.innerWidth <= 768 ? '' : '30px',
   display: window.innerWidth <= 768 ? 'block' : 'flex',
   boxSizing: window.innerWidth <= 768 ? '' : 'inherit'
