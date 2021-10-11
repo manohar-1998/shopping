@@ -10,31 +10,28 @@ const Termsandconditions = () => {
     const [termspolicy, setTermspolicy] = useState(false);
 
     function Redirecttoprivacyfunction() {
-        // var x = document.getElementById('Privacypolicy');
-        console.log("AAA==")
-        // if (x.style.display == 'none') {
-        //     document.getElementById('termsconditions').style.display = 'none';
-        //     document.getElementById('Refund').style.display = 'none';
-        //     document.getElementById('Privacypolicy').style.display = 'block'
-        // }
+        var x = document.getElementById('Privacypolicy');
+        if (x.style.display == 'none') {
+            document.getElementById('termsconditions').style.display = 'none';
+            document.getElementById('Refund').style.display = 'none';
+            document.getElementById('Privacypolicy').style.display = 'block'
+        }
     }
-    function Redirecttotermsandconditions() {
-        console.log("GGG==")
-        // var x = document.getElementById('termsconditions');
-        // if (x.style.display == 'none') {
-        //     document.getElementById('termsconditions').style.display = 'block';
-        //     document.getElementById('Refund').style.display = 'none';
-        //     document.getElementById('Privacypolicy').style.display = 'none'
-        // }
+    function termsandconditionsfun() {
+        var x = document.getElementById('termsconditions');
+        if (x.style.display == 'none') {
+            document.getElementById('termsconditions').style.display = 'block';
+            document.getElementById('Refund').style.display = 'none';
+            document.getElementById('Privacypolicy').style.display = 'none'
+        }
     }
-    function Redirecttorefundpolicy() {
-        console.log("VVV==")
-        // var x = document.getElementById('Refund');
-        // if (x.style.display == 'none') {
-        //     document.getElementById('termsconditions').style.display = 'none';
-        //     document.getElementById('Refund').style.display = 'block';
-        //     document.getElementById('Privacypolicy').style.display = 'none'
-        // }
+    function refundpolicyfun() {
+        var x = document.getElementById('Refund');
+        if (x.style.display == 'none') {
+            document.getElementById('termsconditions').style.display = 'none';
+            document.getElementById('Refund').style.display = 'block';
+            document.getElementById('Privacypolicy').style.display = 'none'
+        }
     }
     return (
 
@@ -57,13 +54,13 @@ const Termsandconditions = () => {
                         <hr />
                         <div style={{ width: '100%', display: 'flex', fontSize: '24px', justifyContent: 'space-between' }}>
                             {/* <span class="menuitem1" style={{cursor: 'pointer'}}> */}
-                            <div onClick={() => Redirecttotermsandconditions()} class="hoverbtn">TERMS & CONDITIONS</div>
+                            <div onClick={() =>termsandconditionsfun()} class="hoverbtn">TERMS & CONDITIONS</div>
                             {/* </span> */}
                             {/* <span> */}
-                            <div onclick={() => Redirecttoprivacyfunction()} class="hoverbtn">PRIVACY POLICY</div>
+                            <div onClick={() =>Redirecttoprivacyfunction()} class="hoverbtn">PRIVACY POLICY</div>
                             {/* </span> */}
                             <span style={{ cursor: 'pointer', marginRight: '30px' }}>
-                                <div  onclick="#Refund" class="hoverbtn">REFUND & CANCELLATION POLICY</div>
+                                <div  onClick={()=>refundpolicyfun()} class="hoverbtn">REFUND & CANCELLATION POLICY</div>
                             </span>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import './service.css';
 import { useHistory } from "react-router";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import bannerimage from "../banner.jpeg"
 import logoimage from "../cyspaceglobalimage.jpeg"
 const Service = () => {
     const [popup, setPopup] = useState(0);
@@ -46,7 +47,7 @@ const Service = () => {
     }
     let totalpayable_amount = finaltotal + calcamount;
 
-    console.log("inputList=",inputList)
+    console.log("inputList=", inputList)
     async function handleToken(token, address) {
         console.log("Token==", token, address)
         const response = await axios.post(`http://localhost:5000/api/v1/checkout`, {
@@ -56,9 +57,9 @@ const Service = () => {
             totalpayable_amount
         })
         const { status } = response.data;
-        console.log(response,"RESPONSDATA==",response.data)
+        console.log(response, "RESPONSDATA==", response.data)
         if (status === "success") {
-            alert("Success! Check email for details", { type: "success" });
+            alert("Your, Orders has been placed Successfully", { type: "success" });
             window.location.reload();
         } else {
             alert("Something went wrong", { type: "error" });
@@ -116,7 +117,10 @@ const Service = () => {
 
     return (
         <div>
-            <div class="row" style={{ float: 'left', display: window.innerWidth <= 768 ? 'block' : 'flex', width: window.innerWidth <= 768 ? '100%' : '80%', margin: window.innerWidth <= 768 ? '' : '100px 0px 0px 160px', justifyContent: 'center', backgroundColor: 'lavenderblush' }}>
+            <div>
+                <img src={bannerimage} style={{ width: '100%' }} ></img>
+            </div>
+            <div class="row" style={{ float: 'left', display: window.innerWidth <= 768 ? 'block' : 'flex', width: window.innerWidth <= 768 ? '100%' : '80%', margin: window.innerWidth <= 768 ? '' : '10px 0px 0px 160px', justifyContent: 'center', backgroundColor: 'lavenderblush' }}>
                 <div style={{ width: window.innerWidth <= 768 ? '100%' : '50%' }}>
                     <div style={{ display: window.innerWidth <= 768 ? 'block' : 'flex', }}>
                         <div style={{
@@ -132,7 +136,7 @@ const Service = () => {
                                         <p style={{ display: window.innerWidth <= 768 ? '' : 'flex', marginTop: '10px', }}>
                                             <img src={logoimage} alt=""
                                                 style={{ width: window.innerWidth <= 768 ? '10%' : '50px', borderRadius: '4px' }} />&nbsp;&nbsp;&nbsp;
-                                            <span style={{ fontSize:'21px', fontWeight: '500', marginTop: '8px' }} >Cyspace Global Technology Private Limited</span><br />
+                                            <span style={{ fontSize: '21px', fontWeight: '500', marginTop: '8px' }} >Cyspace Global Technology Private Limited</span><br />
                                         </p>
                                         <span><h4>Managed Security Service Provider</h4></span>
                                         <span><h6>Certified in ISO 9001:2015 (QMS) <span style={{ fontWeight: '1000' }} >|</span> ISO27001: 2013 (ISM) <span style={{ fontWeight: '1000' }} >|</span> ISO 22301: 2013 (SMC)</h6></span>
@@ -597,7 +601,10 @@ const Service = () => {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
+            <div>
+                <div style={{float:'right',margin: '10px 30px 10px 0px' }}>Powered By <a href="https://www.cyspaceglobal.com" >CyspaceGlobal</a></div>
+            </div>
         </div >
     )
 }

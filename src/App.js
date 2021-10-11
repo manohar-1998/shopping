@@ -1,6 +1,8 @@
 import './App.css';
 import headerimage from "./logo192.png";
+import cyspacelogo from "./cyspaceglobalimage.jpeg"
 import leftimage from "./khakibombshell2.0.jpg";
+import headerimg from "./appheaderimg.jpg";
 import rightimage from "./greenpant.jpg";
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
@@ -14,7 +16,7 @@ import { useHistory } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 function App() {
-  const history=useHistory();
+  const history = useHistory();
   const stripePromise = loadStripe('pk_test_51JJAHkSHEhusvEucppm0kRbhS1PrhYEGQAIKSQNoShXeh8R6M7HbcLXkEih9qvvrKzsGMjkAFkxqIGRlr5e1TyVy00UsriMcHz');
   const [open1, setOpen1] = useState(false);
   var filtered = [];
@@ -121,21 +123,22 @@ function App() {
     const value = event.target.value;
     setProduct({ ...product, [name]: value });
   };
-  console.log("filtered==",filtered)
+  console.log("filtered==", filtered)
   useEffect(() => {
-    let total = Object.values(filtered).reduce((acc, {qty,price}) => acc += qty * price, 0);
-        setProduct({...product,finalbill:total})
+    let total = Object.values(filtered).reduce((acc, { qty, price }) => acc += qty * price, 0);
+    setProduct({ ...product, finalbill: total })
   }, [updatelist]);
+  console.log("product==",product)
   async function handleToken(token, address) {
     console.log("Token==", token, address)
-    const response = await axios.post(`http://localhost:5000/api/v1/checkout`, {
+    const response = await axios.post(`http://localhost:5000/api/v1/shopcheckout`, {
       token,
       product,
     })
     const { status } = response.data;
     console.log(response)
     if (status === "success") {
-      alert("Success! Check email for details", { type: "success" });
+      alert("Your, Orders has been placed Successfully", { type: "success" });
       window.location.reload();
     } else {
       alert("Something went wrong", { type: "error" });
@@ -148,14 +151,6 @@ function App() {
         console.log("lists======", val);
         val.qty = qty;
         setUpdatelist(!updatelist);
-        return (
-          <div style={{ marginTop: '20px', display: 'flex' }}>
-            {/* <div>{hideval}</div>
-      <div style={{ marginLeft: '25px' }}>Timber</div>
-      <div onChange={()=>setFinalprice(hideval * price)} 
-      style={{ marginLeft: window.innerWidth <= 768 ? '230px' : '340px' }}> ${hideval * price}</div> */}
-          </div>
-        )
       }
     })
   }
@@ -226,20 +221,23 @@ function App() {
     <div style={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}>
       <div>
         <div style={{ backgroundColor: 'rgb(22,155,215', width: '100%' }}>
-          <img src={headerimage} alt width='200' height='200' tabIndex="0"></img>
+          <img src={cyspacelogo} alt style={{width: window.innerWidth<=786 ? '100%' : '257px' }} height='200' tabIndex="0"></img>
+          <img src={headerimg} alt style={{display: window.innerWidth<=786 ? 'none' : '' }} width='83%' height='200' tabIndex="0"></img>
         </div>
+
       </div>
       <div style={{ border: ' 0.1px solid rgba(34, 36, 38, 0.3)', padding: '15px' }}>
         <div style={{ padding: '10px', display: window.innerWidth <= 768 ? 'block' : 'flex' }}>
           <div style={{ width: '10%', marginTop: '10px', marginBottom: '10px', display: window.innerWidth <= 768 ? 'flex' : '' }}>
+            <div><Button style={{ border: ' 0.1px solid rgba(34, 36, 38, 0.3)', margin: '3px' }} onClick={service} >
+              <Link to="/service">Services</Link></Button>
+            </div>
             <div>
               <Button style={{ border: ' 0.1px solid rgba(34, 36, 38, 0.3)', margin: '3px' }} onClick={() => setOpen1(true)} >Product</Button>
               <Drawer open={open1} anchor={"top"} onClose={() => setOpen1(false)}>
                 {list()}
               </Drawer>
             </div>
-            <div><Button style={{ border: ' 0.1px solid rgba(34, 36, 38, 0.3)', margin: '3px' }} onClick={service} >
-              <Link to="/service">Services</Link></Button></div>
             <div><Button style={{ border: ' 0.1px solid rgba(34, 36, 38, 0.3)', margin: '3px' }}>Others</Button></div>
           </div>
           <div style={{ width: window.innerWidth <= 768 ? '100%' : '80%' }}>
@@ -1079,7 +1077,7 @@ function App() {
                       token={handleToken}
                       billingAddress
                       shippingAddress
-                      amount={displaytotalbill()*100}
+                      amount={displaytotalbill() * 100}
 
                     >
                       <div style={{ marginTop: '20px', width: '100%' }}>
@@ -1147,12 +1145,9 @@ function App() {
       </div>
       <hr style={{ border: ' border: 1px solid #f00', margin: '20px 0px 20px 0px' }} />
       <div><br />
-        <div style={{ textAlign: 'center', color: 'rgba(47, 47, 47, 0.541176)' }} data-bold="inherit" contenteditable="false">
+        <div style={{float:'left', margin: window.innerWidth <= 768 ? '':'0px 0px 0px 550px' }} data-bold="inherit" contenteditable="false">
           <b>© 2020 ExtendYourAdventure.com</b>&nbsp;- All Rights Reserved -
           <Link to="/Terms&conditions">Our Policies</Link>&nbsp;&nbsp;
-          {/* <Link to="/Terms&conditions">Privacy Policy</Link>&nbsp;&nbsp;
-          <Link to="/Terms&conditions">Shipping and Returns</Link>&nbsp;&nbsp;
-          <Link to="/Terms&conditions">About/ Contact Us</Link> */}
         </div>
       </div>
     </div>
