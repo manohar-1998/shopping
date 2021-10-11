@@ -131,7 +131,8 @@ function App() {
   console.log("product==",product)
   async function handleToken(token, address) {
     console.log("Token==", token, address)
-    const response = await axios.post(`http://localhost:5000/api/v1/shopcheckout`, {
+    // const response = await axios.post(`http://localhost:5000/api/v1/shopcheckout`, {
+      const response = await axios.post(`https://shopping-gm.herokuapp.com/api/v1/checkout`, {
       token,
       product,
     })

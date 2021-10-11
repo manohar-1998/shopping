@@ -50,7 +50,8 @@ const Service = () => {
     console.log("inputList=", inputList)
     async function handleToken(token, address) {
         console.log("Token==", token, address)
-        const response = await axios.post(`http://localhost:5000/api/v1/checkout`, {
+        // const response = await axios.post(`http://localhost:5000/api/v1/checkout`, {
+            const response = await axios.post(`https://shopping-gm.herokuapp.com/api/v1/checkout`, {
             token,
             address,
             inputList,
@@ -63,6 +64,7 @@ const Service = () => {
             window.location.reload();
         } else {
             alert("Something went wrong", { type: "error" });
+            window.location.reload();
         }
     }
     const handleInputChange = (e, index) => {
