@@ -19,6 +19,7 @@ function App() {
   const history = useHistory();
   const stripePromise = loadStripe('pk_test_51JJAHkSHEhusvEucppm0kRbhS1PrhYEGQAIKSQNoShXeh8R6M7HbcLXkEih9qvvrKzsGMjkAFkxqIGRlr5e1TyVy00UsriMcHz');
   const [open1, setOpen1] = useState(false);
+  const [timer,setTimer] = useState('00:00:00');
   var filtered = [];
   const displaytotalbill = () => {
     var sum = 0;
@@ -41,7 +42,6 @@ function App() {
   });
   const { qty, price, name, size, finalqty, description, finalbill } = product;
   const [hideval, setHideval] = useState(0);
-  console.log("Hideval value==", hideval)
   const [finalprice, setFinalprice] = useState(0);
   const setHidefunction = (data) => {
     setHideval(data.value);
@@ -123,21 +123,44 @@ function App() {
     const value = event.target.value;
     setProduct({ ...product, [name]: value });
   };
-  console.log("filtered==", filtered)
+
+
+  const calculateTimeLeft = () => {
+    let year = new Date().getFullYear();
+    let difference = +new Date(`10/01/${year}`) - +new Date();
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+    };
+  }
+
+  return timeLeft;
+
+}
+const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   useEffect(() => {
     let total = Object.values(filtered).reduce((acc, { qty, price }) => acc += qty * price, 0);
-    setProduct({ ...product, finalbill: total })
+    setProduct({ ...product, finalbill: total });
+
+    setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearTimeout(timer);
+
+
   }, [updatelist]);
-  console.log("product==",product)
   async function handleToken(token, address) {
-    console.log("Token==", token, address)
     const response = await axios.post(`http://localhost:5000/api/v1/shopcheckout`, {
       // const response = await axios.post(`https://shopping-gm.herokuapp.com/api/v1/checkout`, {
       token,
       product,
     })
     const { status } = response.data;
-    console.log(response)
     if (status === "success") {
       alert("Your, Orders has been placed Successfully", { type: "success" });
       window.location.reload();
@@ -149,7 +172,6 @@ function App() {
   const qunatitylist = (individuallist, qty) => {
     data.map((val, id) => {
       if (individuallist.id === val.id) {
-        console.log("lists======", val);
         val.qty = qty;
         setUpdatelist(!updatelist);
       }
@@ -218,12 +240,35 @@ function App() {
     })
   }
 
+const timerComponents = [];
+
+Object.keys(timeLeft).forEach((interval) => {
+  if (!timeLeft[interval]) {
+    return;
+  }
+
+  timerComponents.push(
+    <span>
+      {timeLeft[interval]} {interval}{" "}
+    </span>
+  );
+});
+
   return (
     <div >
       <div>
-        <div style={{  width: '100%' }}>
-          <img src={cyspacelogo} alt style={{width: window.innerWidth<=786 ? '100%' : '257px' }} height='200' tabIndex="0"></img>
-          <img src={headerimg} alt style={{display: window.innerWidth<=786 ? 'none' : '' }} width='83%' height='200' tabIndex="0"></img>
+        <div style={{ backgroundColor: '#F4EEED', width: '100%',display:window.innerWidth <= 768 ? 'block' :'flex' }}>
+          <img src={cyspacelogo} alt style={{ width: window.innerWidth <= 768 ? '100%' : '257px',}} height='200' tabIndex="0"></img>
+          <h1 style={{margin: '4% auto',fontSize:'70px'}}><span style={{color:'red'}} >C</span>yspace <span style={{color:'red'}} >T</span>ravel <span style={{color:'red'}} >G</span>ear <span style={{color:'red'}} >E</span>ssentials</h1><br/>
+          <a href="https://www.cyspaceglobal.com" target="_blank" class="contactushover" 
+          style={{
+            float:'left', 
+            margin:'1% auto', 
+            textDecoration:'none',
+            cursor:'pointer',
+            borderRadius:'5px',
+            height:'40px',
+            }}><h3>Contact Us</h3></a>
         </div>
 
       </div>
@@ -231,7 +276,7 @@ function App() {
         <div style={{ padding: '10px', display: window.innerWidth <= 768 ? 'block' : 'flex' }}>
           <div style={{ width: '10%', marginTop: '10px', marginBottom: '10px', display: window.innerWidth <= 768 ? 'flex' : '' }}>
             <div><Button style={{ border: ' 0.1px solid rgba(34, 36, 38, 0.3)', margin: '3px' }} onClick={service} >
-              <Link to="/service">Services</Link></Button>
+              <Link to="/">Services</Link></Button>
             </div>
             <div>
               <Button style={{ border: ' 0.1px solid rgba(34, 36, 38, 0.3)', margin: '3px' }} onClick={() => setOpen1(true)} >Product</Button>
@@ -1117,7 +1162,7 @@ function App() {
                 border: '2px solid white',
               }}>
                 <h3><b>100% Money Back Guarantee</b></h3>
-                <div>We stand behind our products 100%. If you are not satisfied with your purchase, please email support@extendyouradventure.com and we'll make sure you're happy!</div>
+                <div>We stand behind our products 100%. If you are not satisfied with your purchase, please email admin@cyspaceglobal.com and we'll make sure you're happy!</div>
               </div>
             </div>
           </div>
@@ -1146,7 +1191,7 @@ function App() {
       </div>
       <hr style={{ border: ' border: 1px solid #f00', margin: '20px 0px 20px 0px' }} />
       <div><br />
-        <div style={{float:'left', margin: window.innerWidth <= 768 ? '':'0px 0px 0px 550px' }} data-bold="inherit" contenteditable="false">
+        <div style={{ float: 'left', margin: window.innerWidth <= 768 ? '' : '0px 0px 0px 550px' }} data-bold="inherit" contenteditable="false">
           <b>© 2020 ExtendYourAdventure.com</b>&nbsp;- All Rights Reserved -
           <Link to="/Terms&conditions">Our Policies</Link>&nbsp;&nbsp;
         </div>

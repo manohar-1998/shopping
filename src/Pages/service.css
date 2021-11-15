@@ -35,3 +35,9 @@
     max-height: 30%;
     overflow: auto;
   }
+  .dropdown-menu {
+    max-height: 146px;
+    overflow: scroll;
+    /* overflow-x: hidden; */
+    margin-top: 0px;
+}

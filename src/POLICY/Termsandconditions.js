@@ -1,14 +1,9 @@
 import './style.css'
 import React, { useState } from "react";
-
+import { useHistory } from "react-router";
+import logoimage from "../cyspaceglobalimage.jpeg"
 const Termsandconditions = () => {
-
-    console.log("ppp=", document.getElementById('Privacypolicy'))
-
-    const [policystate, setPolicystate] = useState(false);
-    const [refunpolicy, setRefundpolicy] = useState(false);
-    const [termspolicy, setTermspolicy] = useState(false);
-
+    const history = useHistory();
     function Redirecttoprivacyfunction() {
         var x = document.getElementById('Privacypolicy');
         if (x.style.display == 'none') {
@@ -33,34 +28,39 @@ const Termsandconditions = () => {
             document.getElementById('Privacypolicy').style.display = 'none'
         }
     }
+    function homeredirectionfunction(){
+        history.push("/")
+    }
     return (
-
         <div>
             <section>
                 <div>
                     <div class="container">
                         <p>
-                            <a href="index.html">
-                                <img src="https://likithsinghcy.github.io/cyspace_weboff/images/logo.png" alt="logo"
-                                    width="170px" />
-                            </a>
+                            <span style={{cursor:'pointer'}} onClick={()=>homeredirectionfunction()}>
+                                <img src={logoimage}  alt="logo" width="200px" />
+                            </span>
+                            <span>
+                            <marquee width="80%" direction="right">
+                                <span style={{fontSize:'50px'}} ><b>Cyspace Policies</b></span>
+                            </marquee></span>
                         </p>
                         <span style={{ fontSize: '20px' }}>
-                            <p>Welcome to Cyspace Group's.</p>
+                            <span>Welcome to Cyspace Group's.</span>
                             <p>These terms and conditions outline the rules and regulations for the use of Cyspace Global's.
                                 Website,located at <a href="https://www.cyspaceglobal.com">https://www.cyspaceglobal.com</a>
                             </p>
                         </span>
                         <hr />
-                        <div style={{ width: '100%', display: 'flex', fontSize: '24px', justifyContent: 'space-between' }}>
-                            {/* <span class="menuitem1" style={{cursor: 'pointer'}}> */}
-                            <div onClick={() =>termsandconditionsfun()} class="hoverbtn">TERMS & CONDITIONS</div>
-                            {/* </span> */}
-                            {/* <span> */}
-                            <div onClick={() =>Redirecttoprivacyfunction()} class="hoverbtn">PRIVACY POLICY</div>
-                            {/* </span> */}
+                        <div style={{ width: '100%', display: window.innerWidth <= 768 ? 'block' :'flex', fontSize:window.innerWidth <= 768 ? '18px' : '24px', justifyContent: 'space-between' }}>
+                            <span class="menuitem1" style={{cursor: 'pointer'}}>
+                            <div onClick={() => termsandconditionsfun()} class="hoverbtn">TERMS & CONDITIONS</div>
+                            </span>
+                            <span style={{cursor: 'pointer'}}>
+                            <div onClick={() => Redirecttoprivacyfunction()} class="hoverbtn">PRIVACY POLICY</div>
+                             </span>
                             <span style={{ cursor: 'pointer', marginRight: '30px' }}>
-                                <div  onClick={()=>refundpolicyfun()} class="hoverbtn">REFUND & CANCELLATION POLICY</div>
+                                <div onClick={() => refundpolicyfun()} class="hoverbtn">REFUND & CANCELLATION POLICY</div>
                             </span>
                         </div>
                     </div>
@@ -80,9 +80,9 @@ const Termsandconditions = () => {
                                 <p>This Terms of Service Agreement ("Agreement") is entered into by and between Return Policy,
                                     registered address plot no 237, Flat no 401, Gem motors Road, Raghavendra society, Kondapur,
                                     Hyderabad, India ("Company") and you, and is made effective as of the date of your use of
-                                    this website http://cyspacelabs.com ("Site") or the date of electronic acceptance.
+                                    this website https://www.cyspaceglobal.com or the date of electronic acceptance.
                                     This Agreement sets forth the general terms and conditions of your use of the
-                                    http://cyspacelabs.com as well as the products and/or services purchased or accessed through
+                                    https://www.cyspaceglobal.com as well as the products and/or services purchased or accessed through
                                     this Site (the "Services").Whether you are simply browsing or using this Site or purchase
                                     Services, your use of this Site and your electronic acceptance of this Agreement signifies
                                     that you have read, understand, acknowledge and agree to be bound by this Agreement our
@@ -313,7 +313,7 @@ const Termsandconditions = () => {
                             <li>CONTACT INFORMATION
                                 <p>If you have any questions about this Agreement, please contact us by email or regular mail at
                                     the following address: plot no 237, Flat no 401, Gem motors Road, Raghavendra society,
-                                    Kondapur, Hyderabad, ,India | contact@cyspacelabs.com</p>
+                                    Kondapur, Hyderabad, ,India | contact@cyspaceglobal.com</p>
                             </li>
                         </ul>
                     </div>
@@ -323,14 +323,14 @@ const Termsandconditions = () => {
                 <h3><strong>PRIVACY POLICY</strong></h3>
                 <p>Your privacy is important to us, so Return Policy, a India, has created the following Privacy Policy to let
                     you know what information we collect when you visit our Site <a
-                        href="http://cyspacelabs.com">http://cyspacelabs.com</a>
+                        href="http://cyspaceglobal.com">http://cyspaceglobal.com </a>
                     why we collect it and how we use it.</p>
                 <p>
                     The terms "You," "Your," "Yours" and "User" refer to the entity/person/organization using our Site.
                     When this Policy mentions "We", "Us," and "Our" it refers to Return Policy and its subsidiaries and
                     affiliates. This Privacy Policy is governed by our Terms of Services.
                     For any questions regarding this Policy or any requests regarding the processing of personal data, please
-                    contact us at contact@cyspacelabs.com.
+                    contact us at contact@cyspaceglobal.com.
                 </p>
                 <ul>
                     <li>INFORMATION WE COLLECT FROM YOU
@@ -442,7 +442,7 @@ const Termsandconditions = () => {
                             We therefore encourage you to avoid providing us or anyone with any sensitive information of which
                             you believe its disclosure could cause you substantial or irreparable harm.
                             If you have any questions regarding the security of our Site or Services, you are welcome to contact
-                            us at contact@cyspacelabs.com.
+                            us at contact@cyspaceglobal.com.
                         </p>
                     </li>
                     <li>YOUR RIGHTS
@@ -495,13 +495,13 @@ const Termsandconditions = () => {
                 <h3><strong>REFUND POLICY AND CANCELLATION POLICY</strong></h3>
                 <p>All our clients are very important to us, that's why Return Policy ("Cyspace Global Technology Pvt Ltd"), has
                     created the following Refund Policy to let You know how we handle the refunds for the goods ordered and
-                    bought on our website <a href="http://cyspacelabs.com">http://cyspacelabs.com</a></p>
+                    bought on our website <a href="http://cyspaceglobal.com">http://cyspaceglobal.com</a></p>
                 <p>The terms "You," "Your," and "Yours" refer to the entity/ person/ organization using our website. When this
                     Policy mentions "we", "us,", and "our" it refers to the Company and its subsidiaries or /and affiliates. The
                     term "goods" refer to any product or item bought on our Website by You.
                     This Refund Policy is governed by our Terms of Services.</p>
                 <p>For any questions regarding this Refund Policy or any requests regarding the refunds and returns, please
-                    contact us by email contact@cyspacelabs.com, phone +91 8500018118 or other contacts provided below.</p>
+                    contact us by email contact@cyspaceglobal.com, phone +91 8500018118 or other contacts provided below.</p>
                 <p> You have the right, without giving a reason, to return the goods within 14, if it has not been used, damaged
                     or its appearance has not substantially changed, that is, the appearance of the product or its packaging has
                     been made only such alterations as were necessary to inspect the goods received.</p>
@@ -533,7 +533,7 @@ const Termsandconditions = () => {
                     <li>DEFECTIVE GOODS
                         <p>In certain cases, such as defective, damaged or wrong goods, you may be required to provide evidence
                             of the issue, such as a photo or video, or to return the item to receive a refund.</p>
-                        <p>You must contact our company at contact@cyspacelabs.com within 14 upon purchase and provide detailed
+                        <p>You must contact our company at contact@cyspaceglobal.com within 14 upon purchase and service provide detailed
                             information, such as:</p>
                         <ul>
                             <li>Proof of purchase</li>
